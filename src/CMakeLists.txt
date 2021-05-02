@@ -1,5 +1,4 @@
 
-# project(leetcode_training)
 
 include_directories(${PROJECT_SOURCE_DIR}/open_source)
 
@@ -14,3 +13,5 @@ add_executable(leetcode_training
     ${SRCS}
     ${HDRS}
 )
+
+target_link_libraries(leetcode_training -lpthread)
