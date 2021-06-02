@@ -1,13 +1,48 @@
-#include "reverse_linked_list.h"
+
 #include "gtest/gtest.h"
 
-#include <vector>
+namespace t206 {
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+ListNode* reverseList_1(ListNode* head)
+{
+    ListNode* out = nullptr;
+    for (ListNode* cur = head; cur != nullptr; cur=cur->next) {
+        out = new ListNode(cur->val, out);
+    }
+
+    return out;
+}
+
+ListNode* reverseList_2(ListNode* head)
+{
+    ListNode* out = nullptr;
+    ListNode* next = nullptr;
+    for (ListNode* cur = head; cur != nullptr; cur=next) {
+        next = cur->next;
+        cur->next = out;
+        out = cur;
+    }
+
+    return out;
+}
+
+
+// =================================================================
+
 
 class ReverseLinkedListTest : public testing::Test
 {
 public:
     virtual void SetUp() {
-        m_ptr = ReverseLinkedList::create(2);
+        func = &reverseList_1;
     }
 
     virtual void TearDown() {
@@ -29,13 +64,13 @@ public:
     }
 
 protected:
-    std::shared_ptr<ReverseLinkedList> m_ptr;
+    ListNode* (*func)(ListNode* head);
 };
 
 TEST_F(ReverseLinkedListTest, test_1)
 {
     ListNode* in = make_list({1, 2, 3, 4, 5});
-    ListNode* rst = m_ptr->reverseList(in);
+    ListNode* rst = func(in);
     ASSERT_NE(nullptr, rst);
     ASSERT_EQ(5, rst->val);
     ASSERT_EQ(4, rst->next->val);
@@ -47,7 +82,7 @@ TEST_F(ReverseLinkedListTest, test_1)
 TEST_F(ReverseLinkedListTest, test_2)
 {
     ListNode* in = make_list({1, 2});
-    ListNode* rst = m_ptr->reverseList(in);
+    ListNode* rst = func(in);
     ASSERT_NE(nullptr, rst);
     ASSERT_EQ(2, rst->val);
     ASSERT_EQ(1, rst->next->val);
@@ -56,6 +91,8 @@ TEST_F(ReverseLinkedListTest, test_2)
 TEST_F(ReverseLinkedListTest, test_3)
 {
     ListNode* in = make_list({});
-    ListNode* rst = m_ptr->reverseList(in);
+    ListNode* rst = func(in);
     ASSERT_EQ(nullptr, rst);
+}
+
 }
