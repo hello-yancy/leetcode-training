@@ -14,4 +14,3 @@ add_executable(leetcode_training
 )
 
 target_link_libraries(leetcode_training -lpthread)
-# target_link_libraries(leetcode_training -lpthread)

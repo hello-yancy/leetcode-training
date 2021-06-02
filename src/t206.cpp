@@ -42,7 +42,7 @@ class ReverseLinkedListTest : public testing::Test
 {
 public:
     virtual void SetUp() {
-        func = &reverseList_1;
+        reverseList = &reverseList_1;
     }
 
     virtual void TearDown() {
@@ -64,13 +64,13 @@ public:
     }
 
 protected:
-    ListNode* (*func)(ListNode* head);
+    ListNode* (*reverseList)(ListNode* head);
 };
 
 TEST_F(ReverseLinkedListTest, test_1)
 {
     ListNode* in = make_list({1, 2, 3, 4, 5});
-    ListNode* rst = func(in);
+    ListNode* rst = reverseList(in);
     ASSERT_NE(nullptr, rst);
     ASSERT_EQ(5, rst->val);
     ASSERT_EQ(4, rst->next->val);
@@ -82,7 +82,7 @@ TEST_F(ReverseLinkedListTest, test_1)
 TEST_F(ReverseLinkedListTest, test_2)
 {
     ListNode* in = make_list({1, 2});
-    ListNode* rst = func(in);
+    ListNode* rst = reverseList(in);
     ASSERT_NE(nullptr, rst);
     ASSERT_EQ(2, rst->val);
     ASSERT_EQ(1, rst->next->val);
@@ -91,7 +91,7 @@ TEST_F(ReverseLinkedListTest, test_2)
 TEST_F(ReverseLinkedListTest, test_3)
 {
     ListNode* in = make_list({});
-    ListNode* rst = func(in);
+    ListNode* rst = reverseList(in);
     ASSERT_EQ(nullptr, rst);
 }
 
