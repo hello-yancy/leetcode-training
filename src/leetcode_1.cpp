@@ -2,8 +2,11 @@
 #include "gtest/gtest.h"
 #include <unordered_map>
 
-namespace t1 {
+namespace leetcode_1 {
 
+// 方法一：暴力
+// 执行用时：12 ms, 在所有 C++ 提交中击败了35.60%的用户
+// 内存消耗：10.6 MB, 在所有 C++ 提交中击败了5.39%的用户
 std::vector<int> twoSum_1(std::vector<int>& nums, int target)
 {
     int len = nums.size();
@@ -17,7 +20,7 @@ std::vector<int> twoSum_1(std::vector<int>& nums, int target)
     return std::vector<int>();
 }
 
-// 
+// 方法二：哈希表
 // 执行用时：12 ms, 在所有 C++ 提交中击败了35.60%的用户
 // 内存消耗：10.6 MB, 在所有 C++ 提交中击败了5.39%的用户
 std::vector<int> twoSum_2(std::vector<int>& nums, int target)
