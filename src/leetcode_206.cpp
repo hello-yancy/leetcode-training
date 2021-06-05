@@ -1,7 +1,7 @@
 
 #include "gtest/gtest.h"
 
-namespace t206 {
+namespace leetcode_206 {
 
 struct ListNode {
     int val;

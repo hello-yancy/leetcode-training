@@ -1,5 +1,6 @@
 
 #include "gtest/gtest.h"
+#include <unordered_map>
 
 namespace t1 {
 
@@ -16,6 +17,24 @@ std::vector<int> twoSum_1(std::vector<int>& nums, int target)
     return std::vector<int>();
 }
 
+// 
+// 执行用时：12 ms, 在所有 C++ 提交中击败了35.60%的用户
+// 内存消耗：10.6 MB, 在所有 C++ 提交中击败了5.39%的用户
+std::vector<int> twoSum_2(std::vector<int>& nums, int target)
+{
+    std::unordered_map<int, int> map;
+    int len = nums.size();
+    for (int i = 0; i < len; ++i) {
+        auto it = map.find(target - nums[i]);
+        if (it != map.end()) {
+            return {it->second, i};
+        } else {
+            map.insert(std::pair<int, int>(nums[i], i));
+        }
+    }
+    return {};
+}
+
 
 // =================================================================
 
@@ -24,7 +43,7 @@ class TwoSumTest : public testing::Test
 {
 public:
     virtual void SetUp() {
-        twoSum = &twoSum_1;
+        twoSum = &twoSum_2;
     }
 
     virtual void TearDown() {
